@@ -159,7 +159,7 @@
             
           </span>
             </router-link>
-          <router-link to="/add-post">
+          <router-link to="/history">
             <li>
               <a
                 href="/"
@@ -184,7 +184,7 @@
                 aria-label="Sign up"
                 title="Sign up"
               >
-                Add Product
+                Admin
               </a>
             </li>
           </router-link>

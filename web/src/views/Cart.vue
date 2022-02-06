@@ -8,17 +8,14 @@
   >
     <div v-if="totalPrice !== 0">
       <h2 class="tw-text-xl tw-font-semibold">Your cart</h2>
-      <ul
-        class="tw-flex tw-flex-col tw-divide-y tw-divide-coolGray-300"
-        
-      >
+      <ul class="tw-flex tw-flex-col tw-divide-y tw-divide-coolGray-300" v-for="items in cartItems"
+          :key="items.id">
         <li
           class="
             tw-flex tw-flex-col tw-py-6
             sm:tw-flex-row sm:tw-justify-between
           "
-          v-for="product in cartItems"
-        :key="product.id"
+          
         >
           <div class="tw-flex tw-w-full tw-space-x-2 sm:tw-space-x-4">
             <img
@@ -33,7 +30,7 @@
                 sm:tw-w-32 sm:tw-h-32
                 tw-bg-coolGray-500
               "
-              :src="product.image"
+              :src="items.image"
               alt=""
             />
             <div
@@ -51,13 +48,13 @@
                       sm:tw-pr-8
                     "
                   >
-                    {{ product.title }}
+                    {{ items.title }}
                   </h3>
                   <!-- <p class="tw-text-sm tw-text-coolGray-600">Classic</p> -->
                 </div>
                 <div class="tw-text-right tw-max-w-md">
                   <p class="tw-text-lg tw-font-semibold">
-                    ${{ product.price * product.quantity }}
+                    ${{ items.price  }}
                   </p>
                   <div
                     class="
@@ -87,7 +84,7 @@
                       <span class="tw-m-auto tw-text-2xl tw-font-thin">−</span>
                     </button>
                     <input
-                    disabled
+                      disabled
                       type="tel"
                       class="
                         focus:tw-outline-none
@@ -102,11 +99,10 @@
                         tw-flex tw-items-center tw-text-gray-700 tw-outline-none
                       "
                       name="custom-input-number"
-                      :value="product.quantity"
+                      :value="items.quantity"
                     />
                     <button
                       v-on:click="addToCart(item)"
-                      
                       class="
                         tw-bg-gray-300 tw-text-gray-600
                         hover:tw-text-gray-700 hover:bg-gray-400
@@ -124,7 +120,7 @@
                 >
                   -
                 </button>
-                <span class="cart-quantity">{{ product.quantity }}</span>
+                <span class="cart-quantity">{{ items.quantity }}</span>
                 <button
                   v-on:click="addToCart(items)"
                   class="remove"
@@ -163,32 +159,43 @@
             </div>
           </div>
         </li>
-       
       </ul>
-       <div v-show="totalPrice !== 0" class="tw-space-y-1 tw-text-right tw-flex tw-flex-col tw-ml-auto tw-justify-end" style="width: 50%">
-     
-          <p>
-            Total amount:
-            <span class="tw-font-semibold"
-              >${{ totalPrice}}</span
-            >
-          </p>
-          <p class="tw-text-sm tw-text-coolGray-600">
-            Not including taxes and shipping costs
-          </p>
-      
-       </div>
+      <div
+        v-show="totalPrice !== 0"
+        class="
+          tw-space-y-1
+          tw-text-right
+          tw-flex
+          tw-flex-col
+          tw-ml-auto
+          tw-justify-end
+        "
+        style="width: 50%"
+      >
+        <p>
+          Total amount:
+          <span class="tw-font-semibold">${{ totalPrice }}</span>
+        </p>
+        <p class="tw-text-sm tw-text-coolGray-600">
+          Not including taxes and shipping costs
+        </p>
+      </div>
       <div class="tw-flex tw-mt-6 tw-justify-end tw-space-x-4">
+       <router-link to="/">
         <button
           type="button"
-          class="tw-px-6 tw-py-2 tw-border tw-rounded-md tw-border-violet-600"
+          class="tw-px-6 tw-bg-gray-300
+          tw-text-black tw-border-black  tw-py-2 tw-border-4 tw-rounded-md "
         >
           Back
           <span class="sr-only sm:not-sr-only">to shop</span>
         </button>
+       </router-link>
         <button
           type="button"
           class="
+          tw-bg-black
+          tw-text-white
             tw-px-6
             tw-py-2
             tw-border
@@ -215,12 +222,16 @@ export default {
   data() {
     return {
       item: 0,
+      
     };
   },
+
+
+
   components: { EmptyCart },
   methods: {
     addToCart(item) {
-      this.$store.dispatch("addToCart", item);
+      this.$store.commit("addToCart", item);
     },
     removeItem(item) {
       this.$store.dispatch("removeItem", item);

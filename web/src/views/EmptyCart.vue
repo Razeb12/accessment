@@ -12,9 +12,24 @@
     </svg>
 
     <div class="tw-mt-8">
-        <h1 class="tw-text-center tw-text-2xl">
-            Your cart is empty
-        </h1>
+      <h1 class="tw-text-center tw-text-2xl">Your cart is empty</h1>
+      <router-link to="/">
+        <button
+          type="button"
+          class="
+            tw-px-12
+            tw-bg-black
+            tw-mt-8
+            tw-text-white
+            tw-border-black
+            tw-py-2
+            tw-border-4
+            tw-rounded-md
+          "
+        >
+          Add items to Cart
+        </button>
+      </router-link>
     </div>
   </div>
 </template>

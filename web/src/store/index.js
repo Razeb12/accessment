@@ -2,38 +2,75 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+const cartItems = window.localStorage.getItem('cartItems');
+const cartItemCount = window.localStorage.getItem('cartItemCount');
+
+
 
 export default new Vuex.Store({
+
   state: {
     count: 0,
-    cartItemCount: 0,
-    cartItems: [],
+    cartItemCount: cartItemCount ? parseInt(cartItemCount) : 0,
+    cartItems: cartItems ? JSON.parse(cartItems) : {},
     totalPrice: 0,
   },
   mutations: {
+    saveCart(state) {
+      window.localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+      window.localStorage.setItem('cartItemCount', state.cartItemCount);
+    },
+
+
     increment(state) {
       state.count++
     },
     addToCart(state, payload) {
-      let item = payload;
-      item = { ...item, quantity: 1 };
+
+
+      var items = payload
+
+      items = {
+        ...items,
+        quantity: 1
+      };
+
       if (state.cartItems.length > 0) {
-          let bool = state.cartItems.some(
-              i => i.id == item.id
+        var bool = state.cartItems.some(i => i.id == items.id, )
+        if (bool == true) {
+          var itemsIndex = state.cartItems.findIndex(
+            el => el.id == items.id
           );
-          if (bool == true) {
-              let itemIndex = state.cartItems.findIndex(
-                  el => el.id == item.id
-              );
-              state.cartItems[itemIndex]["quantity"] += 1;
-          } else {
-              state.cartItems.push(item);
-          }
+          state.cartItems[itemsIndex]["quantity"] += 1;
+
+        } else {
+          state.cartItems.push(items);
+        }
       } else {
-          state.cartItems.push(item);
+        state.cartItems.push(items);
       }
+
+
+      // if (state.cartItems.length >=  0) {
+      //   var bool = state.cartItems.some(
+      //     i => i.id == items.id,
+      //     console.log(bool)
+      //   );
+      //   if (bool == true) {
+      //     var itemsIndex = state.cartItems.findIndex(
+      //       el => el.id == items.id
+      //     );
+      //     state.cartItems[itemsIndex]["quantity"] += 1;
+
+      //   } else {
+      //     state.cartItems.push(items);
+      //   }
+      // } else {
+      //   state.cartItems.push(items);
+      // }
       state.cartItemCount++
-      console.log(state.cartItems)
+      this.commit('saveCart');
+      console.log(items.title)
     },
     removeItem(state, payload) {
       if (state.cartItems.length > 0) {
@@ -53,6 +90,7 @@ export default new Vuex.Store({
             state.cartItems.splice(index, 1)
           if (state.cartItemCount !== 0)
             state.cartItemCount--
+          this.commit('saveCart');
         }
       }
     }
@@ -64,13 +102,13 @@ export default new Vuex.Store({
     removeItem: (context, payload) => {
       context.commit('removeItem', payload)
     },
-    increment: (context, ) => {
-      setTimeout(() => {
-        context.commit('increment')
-      }, 5000)
-    },
+    // increment: (context, ) => {
+    //   setTimeout(() => {
+    //     context.commit('increment')
+    //   }, 1000)
+    // },
   },
   getters: {
-   
+
   }
 })

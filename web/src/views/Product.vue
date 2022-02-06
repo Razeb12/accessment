@@ -15,7 +15,7 @@
               tw-border
               tw-border-gray-200
             "
-            :src="product.image"
+            :src="items.image"
           />
           <div
             class="
@@ -35,7 +35,7 @@
                 tw-tracking-widest
               "
             >
-              {{ product.title }}
+              {{ items.title }}
             </h2>
             <!-- <div class="flex mb-4">
           <span class="flex items-center">
@@ -83,9 +83,9 @@
                 tw-6
                 tw-text-gray-900
               "
-              >${{ product.price }}</span
+              >${{ items.price }}</span
             >
-            <p class="leading-relaxed tw-mt-6">{{ product.content }}</p>
+            <p class="leading-relaxed tw-mt-6">{{ items.content }}</p>
             <div
               class="
                 tw-flex
@@ -98,7 +98,7 @@
               "
             >
               <button
-                v-on:click="goToCart()"
+                v-on:click="goToCart"
                 class="
                   tw-flex
                   tw-ml-auto
@@ -115,7 +115,7 @@
                 Go to Cart
               </button>
               <button
-                v-on:click="addToCart()"
+                v-on:click="addToCart(items)"
                 class="
                   tw-flex
                   tw-ml-auto
@@ -134,7 +134,7 @@
             </div>
             <div class="tw-flex tw-justify-end">
               <router-link
-                :to="{ name: 'edit-post', params: { id: product._id } }"
+                :to="{ name: 'edit-post', params: { id: items._id } }"
               >
                 <button
                   class="
@@ -155,10 +155,10 @@
                 </button>
               </router-link>
               <router-link
-                :to="{ name: 'edit-post', params: { id: product._id } }"
+                :to="{ name: 'edit-post', params: { id: items._id } }"
               >
                 <button
-                  @click="removePost(product._id)"
+                  @click="removePost(items._id)"
                   class="
                     tw-flex
                     tw-ml-auto
@@ -189,20 +189,36 @@ import API from "../api";
 export default {
   data() {
     return {
-      product: {},   
-         
+      product: this.$route.params.id,
+      items: [],
     };
   },
 
-  async created() {
-    const response = await API.getProductByID(this.$route.params.id);
-    this.product = response;
-
-    
+  async mounted() {
+    this.fetchProduct();
+    this.intervalFetchData();
+    // window.onpopstate = function () {
+    //   location.reload();
+    // };
   },
- 
+
+  // async created() {
+  //   var response = await API.getProductByID(this.product);
+  //   this.product = response;
+  // },
 
   methods: {
+    async fetchProduct() {
+      var response = await API.getProductByID(this.product);
+      this.items = response;
+    },
+    intervalFetchData: function () {
+      setInterval(() => {
+        this.fetchProduct;
+      }, 1000);
+      console.log(this.product);
+    },
+
     async removePost(id) {
       const response = await API.deleteProduct(id);
       this.$router.push({
@@ -214,10 +230,10 @@ export default {
       this.$router.push("/cart");
     },
 
-    addToCart() {
-      // this.$store.commit("addToCart");
-      this.$store.dispatch("addToCart", this.product);
-     
+    addToCart(items) {
+      this.$store.commit("addToCart", items);
+      console.log(this.items)
+
       // console.log("this.$store", this.$store.state.cartItems);
     },
   },

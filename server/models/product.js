@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema({
     price:String,
     created:{
         type: Date,
-        default: Date.now
+        default: date.getDate()
     }
 });
 

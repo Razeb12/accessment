@@ -8,8 +8,8 @@ export default class API {
         return res.data;
     }
     // get all the  product from the server
-    static async getProductByID(title) {
-        const res = await axios.get(`${url}/${title}`);
+    static async getProductByID(id) {
+        const res = await axios.get(`${url}/${id}`);
         return res.data;
     }
 
