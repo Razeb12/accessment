@@ -8,7 +8,7 @@ cd web and run npm install
 
 ```
 
-### Compiles and hot-reloads for development
+### Serving the application Locally
 ```
 cd server and run npm run start
 cd web and run npm run serve
