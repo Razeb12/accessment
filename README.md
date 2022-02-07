@@ -19,6 +19,8 @@ cd web and run npm run serve
 ![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217045/Screenshot_from_2022-02-07_07-55-08_ap1azy.png)
 ![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217044/Screenshot_from_2022-02-07_07-55-33_txirsw.png)
 ![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217044/Screenshot_from_2022-02-07_07-55-58_czvng9.png)
+![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217387/Screenshot_from_2022-02-07_08-02-51_gwpkfr.png)
+![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217386/Screenshot_from_2022-02-07_08-02-35_mmefre.png)
 
 
 
