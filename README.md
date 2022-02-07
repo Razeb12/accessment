@@ -15,10 +15,12 @@ cd web and run npm run serve
 ```
 
 ### Images
-```
 ![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217048/Screenshot_from_2022-02-07_07-54-45_ht7rft.png)
+![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217045/Screenshot_from_2022-02-07_07-55-08_ap1azy.png)
+![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217044/Screenshot_from_2022-02-07_07-55-33_txirsw.png)
+![alt text](https://res.cloudinary.com/razenprime/image/upload/v1644217044/Screenshot_from_2022-02-07_07-55-58_czvng9.png)
 
-```
+
 
 ### Compiles and minifies for production
 ```
