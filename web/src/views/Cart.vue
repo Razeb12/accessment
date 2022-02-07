@@ -8,14 +8,16 @@
   >
     <div v-if="totalPrice !== 0">
       <h2 class="tw-text-xl tw-font-semibold">Your cart</h2>
-      <ul class="tw-flex tw-flex-col tw-divide-y tw-divide-coolGray-300" v-for="items in cartItems"
-          :key="items.id">
+      <ul
+        class="tw-flex tw-flex-col tw-divide-y tw-divide-coolGray-300"
+        v-for="items in cartItems"
+        :key="items.id"
+      >
         <li
           class="
             tw-flex tw-flex-col tw-py-6
             sm:tw-flex-row sm:tw-justify-between
           "
-          
         >
           <div class="tw-flex tw-w-full tw-space-x-2 sm:tw-space-x-4">
             <img
@@ -53,9 +55,7 @@
                   <!-- <p class="tw-text-sm tw-text-coolGray-600">Classic</p> -->
                 </div>
                 <div class="tw-text-right tw-max-w-md">
-                  <p class="tw-text-lg tw-font-semibold">
-                    ${{ items.price  }}
-                  </p>
+                  <p class="tw-text-lg tw-font-semibold">${{ items.price }}</p>
                   <div
                     class="
                       tw-flex
@@ -181,21 +181,28 @@
         </p>
       </div>
       <div class="tw-flex tw-mt-6 tw-justify-end tw-space-x-4">
-       <router-link to="/">
-        <button
-          type="button"
-          class="tw-px-6 tw-bg-gray-300
-          tw-text-black tw-border-black  tw-py-2 tw-border-4 tw-rounded-md "
-        >
-          Back
-          <span class="sr-only sm:not-sr-only">to shop</span>
-        </button>
-       </router-link>
+        <router-link to="/">
+          <button
+            type="button"
+            class="
+              tw-px-6
+              tw-bg-gray-300
+              tw-text-black
+              tw-border-black
+              tw-py-2
+              tw-border-4
+              tw-rounded-md
+            "
+          >
+            Back
+            <span class="sr-only sm:not-sr-only">to shop</span>
+          </button>
+        </router-link>
         <button
           type="button"
           class="
-          tw-bg-black
-          tw-text-white
+            tw-bg-black
+            tw-text-white
             tw-px-6
             tw-py-2
             tw-border
@@ -222,11 +229,8 @@ export default {
   data() {
     return {
       item: 0,
-      
     };
   },
-
-
 
   components: { EmptyCart },
   methods: {

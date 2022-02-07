@@ -25,18 +25,23 @@ export default new Vuex.Store({
     increment(state) {
       state.count++
     },
-    addToCart(state, payload) {
+    addToCart(state, items) {
 
 
-      var items = payload
+     
 
       items = {
         ...items,
         quantity: 1
       };
 
-      if (state.cartItems.length > 0) {
-        var bool = state.cartItems.some(i => i.id == items.id, )
+  
+
+      if (state.cartItems.length >=  0) {
+        var bool = state.cartItems.some(
+          i => i.id == items.id,
+          console.log(bool)
+        );
         if (bool == true) {
           var itemsIndex = state.cartItems.findIndex(
             el => el.id == items.id
@@ -46,28 +51,7 @@ export default new Vuex.Store({
         } else {
           state.cartItems.push(items);
         }
-      } else {
-        state.cartItems.push(items);
-      }
-
-
-      // if (state.cartItems.length >=  0) {
-      //   var bool = state.cartItems.some(
-      //     i => i.id == items.id,
-      //     console.log(bool)
-      //   );
-      //   if (bool == true) {
-      //     var itemsIndex = state.cartItems.findIndex(
-      //       el => el.id == items.id
-      //     );
-      //     state.cartItems[itemsIndex]["quantity"] += 1;
-
-      //   } else {
-      //     state.cartItems.push(items);
-      //   }
-      // } else {
-      //   state.cartItems.push(items);
-      // }
+      } 
       state.cartItemCount++
       this.commit('saveCart');
       console.log(items.title)
